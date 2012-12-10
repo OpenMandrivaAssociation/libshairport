@@ -3,19 +3,19 @@
 %define	devname	%mklibname shairport -d
 
 %define	snap	20120111
-%define	rel	1
+%define	rel	2
 
 Summary:	Apple RAOP server library
 Name:		libshairport
 Version:	1.2.1
-Release:	%mkrel 0.git%{snap}.%{rel}
+Release:	0.git%{snap}.%{rel}
 License:	MIT
 Group:		System/Libraries
 URL:		https://github.com/amejia1/libshairport
 # git archive --prefix libshairport-20120111/ master | xz > libshairport-20120111.tar.xz
 Source:		%{name}-%{snap}.tar.xz
-BuildRequires:	openssl-devel
-BuildRequires:	libao-devel
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(ao)
 
 %description
 This library emulates an AirPort Express for the purpose of streaming
@@ -41,7 +41,7 @@ Group:		Development/C
 Requires:	%{libname} = %{EVRD}
 # we are not actually linking against it (just using the headers), so this
 # doesn't get added automatically:
-Requires:	libao-devel
+Requires:	pkgconfig(ao)
 Provides:	shairport-devel = %{EVRD}
 
 %description -n %{devname}
@@ -59,11 +59,7 @@ autoreconf -fi
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall_std
-
-%clean
-%__rm -rf %{buildroot}
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
@@ -74,7 +70,9 @@ autoreconf -fi
 %dir %{_includedir}/shairport
 %{_includedir}/shairport/*.h
 %{_libdir}/pkgconfig/%{name}.pc
-%if %{mdvver} < 201200
-%{_libdir}/*.la
-%endif
+
+%changelog
+* Mon Mar 26 2012 Andrey Bondrov <abondrov@mandriva.org> 1.2.1-0.git20120111.1
++ Revision: 786900
+- imported package libshairport
 
