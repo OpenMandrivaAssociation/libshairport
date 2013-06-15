@@ -3,17 +3,16 @@
 %define	devname	%mklibname shairport -d
 
 %define	snap	20120111
-%define	rel	2
 
 Summary:	Apple RAOP server library
 Name:		libshairport
 Version:	1.2.1
-Release:	0.git%{snap}.%{rel}
+Release:	0.git%{snap}.2
 License:	MIT
 Group:		System/Libraries
-URL:		https://github.com/amejia1/libshairport
+Url:		https://github.com/amejia1/libshairport
 # git archive --prefix libshairport-20120111/ master | xz > libshairport-20120111.tar.xz
-Source:		%{name}-%{snap}.tar.xz
+Source0:	%{name}-%{snap}.tar.xz
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(ao)
 
@@ -51,10 +50,10 @@ This package contains the headers that are needed to compile
 applications that use libshairport.
 
 %prep
-%setup -q -n %{name}-%{snap}
+%setup -qn %{name}-%{snap}
+autoreconf -fi
 
 %build
-autoreconf -fi
 %configure2_5x --disable-static
 %make
 
@@ -62,17 +61,12 @@ autoreconf -fi
 %makeinstall_std
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/libshairport.so.%{major}*
 
 %files -n %{devname}
 %doc README
-%{_libdir}/*.so
 %dir %{_includedir}/shairport
 %{_includedir}/shairport/*.h
+%{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
-
-%changelog
-* Mon Mar 26 2012 Andrey Bondrov <abondrov@mandriva.org> 1.2.1-0.git20120111.1
-+ Revision: 786900
-- imported package libshairport
 
