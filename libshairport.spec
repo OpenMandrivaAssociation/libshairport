@@ -6,7 +6,7 @@
 
 Summary:	Apple RAOP server library
 Name:		libshairport
-Version:	1.2.1
+Version:	1.2.1.20121215
 Release:	0.git%{snap}.2
 License:	MIT
 Group:		System/Libraries
