@@ -13,6 +13,11 @@ Group:		System/Libraries
 Url:		https://github.com/amejia1/libshairport
 # git archive --prefix libshairport-20120111/ master | xz > libshairport-20120111.tar.xz
 Source0:	%{name}-%{snap}.tar.xz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(openssl)
 BuildRequires:	pkgconfig(ao)
 
